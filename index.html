@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Behind Every Screen Is a Real Person</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #0b1628;
+  --navy2:  #0f1e38;
+  --navy3:  #152743;
+  --blue:   #1a56db;
+  --blue2:  #3b82f6;
+  --sky:    #60a5fa;
+  --white:  #ffffff;
+  --off:    #f0f4fb;
+  --text:   #1e2a3b;
+  --muted:  #5a6d87;
+  --border: #d4dff0;
+  --pledged:#1a56db;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+html{font-size:16px}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--white);
+  color:var(--text);
+  line-height:1.65;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(11,22,40,.97);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem clamp(1.25rem,5vw,3.5rem);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-logo{
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem;color:var(--white);
+  text-decoration:none;
+  display:flex;align-items:center;gap:.6rem;
+}
+.nav-logo .shield{font-size:1.3rem}
+.nav-links{display:flex;gap:clamp(.6rem,2vw,1.5rem);flex-wrap:wrap}
+.nav-links a{
+  color:rgba(255,255,255,.65);font-size:.82rem;text-decoration:none;
+  transition:color .15s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  background:var(--blue);color:var(--white);
+  padding:.45rem 1.1rem;border-radius:3px;
+  font-size:.8rem;font-weight:600;text-decoration:none;
+  transition:background .15s;white-space:nowrap;
+}
+.nav-cta:hover{background:var(--blue2)}
+
+/* HERO */
+.hero{
+  background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 60%,#0d2252 100%);
+  color:var(--white);
+  padding:clamp(4rem,10vw,8rem) clamp(1.5rem,6vw,5rem) clamp(3rem,8vw,6rem);
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;
+  bottom:-2px;left:0;right:0;height:60px;
+  background:var(--white);
+  clip-path:ellipse(55% 100% at 50% 100%);
+}
+.hero-inner{max-width:720px}
+.slogan{
+  font-size:.75rem;letter-spacing:.18em;
+  color:var(--sky);text-transform:uppercase;
+  font-weight:600;margin-bottom:1.25rem;
+}
+.hero h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(2.2rem,6vw,4.2rem);
+  line-height:1.1;margin-bottom:1.25rem;
+  font-weight:400;
+}
+.hero h1 em{font-style:normal;color:var(--sky)}
+.hero-sub{
+  color:rgba(255,255,255,.65);
+  font-size:clamp(.95rem,2vw,1.1rem);
+  max-width:50ch;margin-bottom:2.5rem;font-weight:300;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:.8rem 1.75rem;
+  font-size:.9rem;font-weight:600;border-radius:3px;
+  text-decoration:none;transition:all .15s;
+}
+.btn-blue{background:var(--blue);color:var(--white)}
+.btn-blue:hover{background:var(--blue2)}
+.btn-outline{border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8)}
+.btn-outline:hover{border-color:var(--sky);color:var(--sky)}
+
+/* STAT BAR */
+.stats{
+  display:flex;flex-wrap:wrap;
+  background:var(--navy);
+}
+.stat{
+  flex:1;min-width:160px;
+  padding:1.6rem 2rem;
+  border-right:1px solid rgba(255,255,255,.06);
+  text-align:center;
+}
+.stat:last-child{border-right:none}
+.stat-n{
+  font-family:'DM Serif Display',serif;
+  font-size:2rem;color:var(--sky);line-height:1;
+  margin-bottom:.35rem;
+}
+.stat-l{color:rgba(255,255,255,.5);font-size:.78rem;max-width:16ch;margin:0 auto}
+
+/* GENERIC SECTION */
+.sec{padding:clamp(3rem,7vw,5.5rem) clamp(1.5rem,6vw,5rem)}
+.sec-inner{max-width:1040px;margin:0 auto}
+.sec-tag{
+  font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue);font-weight:600;margin-bottom:.8rem;
+}
+.sec h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.7rem,3.5vw,2.5rem);
+  font-weight:400;color:var(--navy);
+  margin-bottom:1rem;max-width:28ch;line-height:1.2;
+}
+.sec p.lead{
+  color:var(--muted);font-size:1rem;
+  max-width:52ch;margin-bottom:2.25rem;font-weight:300;
+}
+.alt-bg{background:var(--off)}
+.dark-bg{background:var(--navy);color:var(--white)}
+.dark-bg .sec-tag{color:var(--sky)}
+.dark-bg h2{color:var(--white)}
+.dark-bg p.lead{color:rgba(255,255,255,.55)}
+
+/* INTRO SPLIT */
+.intro-split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;align-items:start;
+}
+@media(max-width:680px){.intro-split{grid-template-columns:1fr}}
+.intro-body p{
+  color:var(--muted);font-size:.95rem;margin-bottom:1rem;
+  max-width:48ch;line-height:1.7;
+}
+.intro-body a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
+.intro-visual{
+  background:var(--navy);
+  border-radius:4px;padding:2rem;
+  display:flex;flex-direction:column;gap:1rem;
+}
+.vis-line{
+  display:flex;align-items:center;gap:.85rem;
+  color:rgba(255,255,255,.8);font-size:.88rem;
+}
+.vis-dot{
+  width:10px;height:10px;border-radius:50%;flex-shrink:0;
+}
+.dot-green{background:#34d399}
+.dot-red{background:#f87171}
+.dot-yellow{background:#fbbf24}
+
+/* GRID CARDS */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.5rem;
+  margin-top:1rem;
+}
+.card{
+  background:var(--white);
+  border:1px solid var(--border);
+  padding:1.75rem;
+  border-radius:4px;
+}
+.card-icon{font-size:1.5rem;margin-bottom:1rem}
+.card h3{
+  font-family:'DM Serif Display',serif;
+  font-size:1.1rem;font-weight:400;color:var(--navy);
+  margin-bottom:.6rem;
+}
+.card p{color:var(--muted);font-size:.88rem;line-height:1.65}
+.dark-bg .card{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.08)}
+.dark-bg .card h3{color:var(--white)}
+.dark-bg .card p{color:rgba(255,255,255,.5)}
+
+/* CONSEQ TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;max-width:600px}
+.tl-item{
+  display:grid;grid-template-columns:2.5rem 1fr;
+  gap:1rem;position:relative;
+}
+.tl-item::before{
+  content:'';position:absolute;
+  left:1.1rem;top:2.2rem;bottom:-1px;width:1px;
+  background:var(--border);
+}
+.tl-item:last-child::before{display:none}
+.tl-dot{
+  width:2.2rem;height:2.2rem;border-radius:50%;
+  background:var(--blue);display:flex;align-items:center;justify-content:center;
+  color:var(--white);font-size:.85rem;font-weight:700;flex-shrink:0;
+  position:relative;z-index:1;margin-top:.1rem;
+}
+.tl-body{padding-bottom:1.75rem}
+.tl-body h3{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:.35rem}
+.tl-body p{color:var(--muted);font-size:.87rem;line-height:1.6}
+
+/* PROTECT TIPS */
+.tip-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+.tip{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:1.5rem;
+}
+.tip h3{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:.5rem}
+.tip ul{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.tip ul li{
+  font-size:.82rem;color:rgba(255,255,255,.55);
+  padding-left:.9rem;position:relative;
+}
+.tip ul li::before{
+  content:'·';position:absolute;left:0;
+  color:var(--sky);font-size:1.1rem;line-height:1.4;
+}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:1.25rem;max-width:580px}
+.step-row{
+  display:grid;grid-template-columns:2.5rem 1fr;
+  gap:1rem;align-items:start;
+}
+.step-num{
+  background:var(--blue);color:var(--white);
+  width:2.5rem;height:2.5rem;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.85rem;flex-shrink:0;
+}
+.step-body h3{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:.3rem}
+.step-body p{color:var(--muted);font-size:.87rem;line-height:1.6}
+
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:.5rem;max-width:680px}
+details{
+  border:1px solid var(--border);border-radius:4px;
+  overflow:hidden;
+}
+details[open]{border-color:var(--blue2)}
+summary{
+  padding:1rem 1.25rem;font-size:.95rem;font-weight:500;
+  color:var(--navy);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  list-style:none;user-select:none;
+}
+summary::after{
+  content:'+';font-size:1.3rem;font-weight:300;color:var(--muted);
+  flex-shrink:0;margin-left:1rem;transition:transform .2s;
+}
+details[open] summary::after{content:'−'}
+.faq-body{padding:.25rem 1.25rem 1.1rem;color:var(--muted);font-size:.88rem;line-height:1.7}
+.faq-body a{color:var(--blue)}
+
+/* FACTS */
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+  margin-top:1rem;
+}
+.fact{background:var(--navy2);padding:1.75rem;text-align:center}
+.fact-n{
+  font-family:'DM Serif Display',serif;
+  font-size:2.2rem;color:var(--sky);line-height:1;margin-bottom:.5rem;
+}
+.fact-t{color:rgba(255,255,255,.55);font-size:.82rem;max-width:18ch;margin:0 auto}
+.fact-src{color:rgba(255,255,255,.25);font-size:.7rem;margin-top:.4rem}
+
+/* HELP RESOURCES */
+.help-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.25rem;
+}
+.help-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;padding:1.5rem;
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.help-card h3{font-size:.95rem;font-weight:600;color:var(--navy)}
+.help-card p{color:var(--muted);font-size:.82rem;line-height:1.55;flex:1}
+.help-card a{
+  font-size:.82rem;font-weight:600;color:var(--blue);
+  text-decoration:none;
+}
+.help-card a:hover{text-decoration:underline}
+
+/* PLEDGE */
+.pledge-wrap{text-align:center;max-width:560px;margin:0 auto}
+.pledge-box{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:4px;padding:2rem;
+  margin-bottom:1.5rem;
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:rgba(255,255,255,.85);line-height:1.6;
+  font-style:italic;text-align:left;
+}
+.pledge-name{
+  width:100%;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.18);border-radius:3px;
+  padding:.75rem 1rem;color:var(--white);font-size:.95rem;
+  margin-bottom:1rem;outline:none;font-family:inherit;
+}
+.pledge-name:focus{border-color:var(--sky)}
+.pledge-name::placeholder{color:rgba(255,255,255,.3)}
+#pledge-btn{
+  background:var(--blue);color:var(--white);
+  border:none;cursor:pointer;
+  padding:.85rem 2.5rem;font-size:.95rem;font-weight:600;
+  border-radius:3px;font-family:inherit;
+  transition:background .15s;
+}
+#pledge-btn:hover{background:var(--blue2)}
+#pledge-confirm{
+  display:none;margin-top:1.25rem;
+  color:var(--sky);font-size:.95rem;font-weight:500;
+}
+.counter{color:rgba(255,255,255,.4);font-size:.8rem;margin-top:.75rem}
+
+/* SOLUTION */
+.solution-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1.5rem;
+}
+.sol-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:4px;padding:1.75rem;
+}
+.sol-do{
+  display:inline-block;font-size:.68rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);margin-bottom:.75rem;
+}
+.sol-card h3{font-size:.95rem;font-weight:600;color:var(--navy);margin-bottom:.5rem}
+.sol-card p{color:var(--muted);font-size:.87rem;line-height:1.6}
+
+/* BOTTOM CTA */
+.bottom{
+  background:linear-gradient(135deg,var(--navy) 0%,#0d2252 100%);
+  padding:clamp(3.5rem,8vw,6rem) clamp(1.5rem,6vw,5rem);
+  text-align:center;
+}
+.bottom h2{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  color:var(--white);font-weight:400;
+  margin-bottom:1rem;max-width:none;
+}
+.bottom p{color:rgba(255,255,255,.55);max-width:46ch;margin:0 auto 2rem;font-size:1rem}
+.bottom .btn-blue{font-size:1rem;padding:1rem 2.5rem}
+
+/* FOOTER */
+footer{
+  background:var(--navy);border-top:1px solid rgba(255,255,255,.07);
+  padding:1.5rem clamp(1.5rem,6vw,5rem);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem;
+}
+footer p{color:rgba(255,255,255,.35);font-size:.78rem}
+footer a{color:rgba(255,255,255,.35);font-size:.78rem;text-decoration:underline;text-underline-offset:3px}
+
+/* RESPONSIVE */
+@media(max-width:680px){
+  .nav-links{display:none}
+  .stats .stat{flex:1 1 50%}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(prefers-color-scheme:dark){
+  :root{--white:#ffffff;--off:#f0f4fb;--border:#d4dff0;--text:#1e2a3b}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#top">
+    <span class="shield">🛡</span>
+    SafeScreen
+  </a>
+  <div class="nav-links">
+    <a href="#what">What is Doxxing</a>
+    <a href="#bullying">Bullying</a>
+    <a href="#consequences">Consequences</a>
+    <a href="#protect">Protect Yourself</a>
+    <a href="#help">Get Help</a>
+    <a href="#pledge">Pledge</a>
+  </div>
+  <a class="nav-cta" href="https://docs.google.com/document/d/1ZhCNt-jAugHHbkzBVeELMN2MltJJXcBxQzf65qXyq3w/edit?usp=sharing" target="_blank" rel="noopener">Full Guide</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <p class="slogan">Behind Every Screen Is a Real Person.</p>
+    <h1>Online safety is <em>everyone's</em> responsibility</h1>
+    <p class="hero-sub">Doxxing and cyberbullying cause real harm to real people. Learn what they are, why they hurt, and what you can do about it.</p>
+    <div class="hero-btns">
+      <a href="#what" class="btn btn-blue">Learn More</a>
+      <a href="#pledge" class="btn btn-outline">Take the Pledge</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">41%</div>
+    <div class="stat-l">of adults have experienced online harassment</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">1 in 5</div>
+    <div class="stat-l">doxxing victims fear for their physical safety</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">3×</div>
+    <div class="stat-l">higher risk of depression after sustained cyberbullying</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">59%</div>
+    <div class="stat-l">of teens have been bullied or harassed online</div>
+  </div>
+</div>
+
+<!-- HOME / INTRO -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="intro-split">
+      <div>
+        <p class="sec-tag">Why This Matters</p>
+        <h2>The internet is real life</h2>
+        <div class="intro-body">
+          <p>What happens online doesn't stay online. Harassment, threats, and exposure of someone's private information follow people into their homes, their schools, and their workplaces.</p>
+          <p>This site exists because understanding the harm is the first step to stopping it. Every section breaks down a specific danger and gives you concrete tools — whether you're a target, a bystander, or someone who wants to do better.</p>
+          <p>For the full resource, read <a href="https://docs.google.com/document/d/1ZhCNt-jAugHHbkzBVeELMN2MltJJXcBxQzf65qXyq3w/edit?usp=sharing" target="_blank" rel="noopener">the complete guide</a>.</p>
+        </div>
+      </div>
+      <div class="intro-visual" aria-hidden="true">
+        <div class="vis-line"><span class="vis-dot dot-green"></span>someone shares a photo of their meal</div>
+        <div class="vis-line"><span class="vis-dot dot-green"></span>a friend likes it and comments</div>
+        <div class="vis-line"><span class="vis-dot dot-yellow"></span>a stranger screenshots the location tag</div>
+        <div class="vis-line"><span class="vis-dot dot-yellow"></span>cross-references their username across platforms</div>
+        <div class="vis-line"><span class="vis-dot dot-red"></span>finds their home address and employer</div>
+        <div class="vis-line"><span class="vis-dot dot-red"></span>posts everything publicly</div>
+        <div class="vis-line"><span class="vis-dot dot-red"></span>the target has 400 messages by morning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS DOXXING -->
+<section class="sec alt-bg" id="what">
+  <div class="sec-inner">
+    <p class="sec-tag">Doxxing</p>
+    <h2>What is doxxing and why is it dangerous?</h2>
+    <p class="lead">Doxxing means publishing someone's private information — name, address, phone number, employer — without their consent, usually to invite harassment.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🏠</div>
+        <h3>Home address exposure</h3>
+        <p>A leaked address brings strangers to someone's door. People have had to leave their homes, change schools, and relocate because of this.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <h3>Workplace targeting</h3>
+        <p>Harassers contact employers directly. Careers end. People lose jobs they worked years to build because of coordinated complaint campaigns.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👨‍👩‍👧</div>
+        <h3>Family information</h3>
+        <p>Exposing relatives' details puts people who had nothing to do with any dispute in direct danger. Parents, siblings, children — all become targets.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚖️</div>
+        <h3>It's often illegal</h3>
+        <p>Doxxing with intent to harass is a criminal offense in many countries and U.S. states. Charges range from stalking to cyberstalking to making threats.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <h3>It doesn't come back</h3>
+        <p>Once information is posted, it's cached, screenshotted, and mirrored. Deleting the original post does not remove the information from circulation.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Anyone can be a target</h3>
+        <p>Doxxing is used against journalists, activists, gamers, students, and ordinary people. You don't have to be famous or controversial — a disagreement is enough.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BULLYING -->
+<section class="sec dark-bg" id="bullying">
+  <div class="sec-inner">
+    <p class="sec-tag">Cyberbullying</p>
+    <h2>Why bullying online causes real harm</h2>
+    <p class="lead">Digital harassment doesn't turn off when you close the app. It follows people everywhere.</p>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <h3>Mental health damage</h3>
+        <p>Persistent bullying significantly increases rates of anxiety, depression, and PTSD. The research is consistent across age groups and platforms.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚫</div>
+        <h3>No safe space</h3>
+        <p>Unlike in-person bullying, online harassment invades bedrooms, midnight, every notification. The target cannot escape by going home.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <h3>Pile-ons multiply damage</h3>
+        <p>Group harassment feels diffuse for participants — everyone does a little — but the target experiences all of it at once, every message, every notification.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Screenshots are permanent</h3>
+        <p>A cruel comment deleted after three minutes has already been screenshotted and can resurface years later. Nothing digital is truly temporary.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👀</div>
+        <h3>Bystanders are participants</h3>
+        <p>Watching without acting reads as approval. Liking, sharing, or staying silent all tell the bully the behavior is acceptable.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <h3>Academic and career impact</h3>
+        <p>Students who are bullied online have significantly lower grades and higher dropout rates. Adults face job loss and professional damage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL CONSEQUENCES -->
+<section class="sec" id="consequences">
+  <div class="sec-inner">
+    <p class="sec-tag">Real Consequences</p>
+    <h2>What harassment actually does to someone's life</h2>
+    <p class="lead">These aren't edge cases. This is what sustained online harassment looks like in practice.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-body">
+          <h3>Immediate fear and hypervigilance</h3>
+          <p>The target stops feeling safe anywhere — online or offline. Sleep disruption, constant anxiety, and difficulty concentrating follow immediately.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-body">
+          <h3>Social withdrawal</h3>
+          <p>People delete accounts, go private, stop posting. They lose communities and connections they built over years to escape the harassment.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-body">
+          <h3>Professional damage</h3>
+          <p>Employers find the harassment pile-on. Colleagues distance themselves. Opportunities disappear. Some people change careers entirely because their name becomes searchable as a harassment target.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-body">
+          <h3>Physical safety risk</h3>
+          <p>Doxxing turns online harassment into physical danger. Swatting (false emergency calls to send police to someone's home) has resulted in deaths.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">5</div>
+        <div class="tl-body">
+          <h3>Long-term psychological effects</h3>
+          <p>PTSD, depression, and social anxiety can persist for years after the harassment stops. For younger targets, it shapes how they relate to people and the internet for life.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTS & STATS -->
+<section class="sec dark-bg">
+  <div class="sec-inner">
+    <p class="sec-tag">Facts & Statistics</p>
+    <h2>The numbers behind the harm</h2>
+    <p class="lead">The scale of online harassment is not ambiguous.</p>
+    <div class="facts-grid">
+      <div class="fact">
+        <div class="fact-n">64%</div>
+        <div class="fact-t">of teens say they've witnessed online harassment</div>
+        <div class="fact-src">Pew Research</div>
+      </div>
+      <div class="fact">
+        <div class="fact-n">90%</div>
+        <div class="fact-t">of teens believe online harassment is a serious problem</div>
+        <div class="fact-src">Pew Research</div>
+      </div>
+      <div class="fact">
+        <div class="fact-n">1 in 4</div>
+        <div class="fact-t">girls experience severe online harassment</div>
+        <div class="fact-src">ADL Center</div>
+      </div>
+      <div class="fact">
+        <div class="fact-n">30%</div>
+        <div class="fact-t">of young people hide bullying from parents</div>
+        <div class="fact-src">Ditch the Label</div>
+      </div>
+      <div class="fact">
+        <div class="fact-n">2×</div>
+        <div class="fact-t">more likely to self-harm if cyberbullied</div>
+        <div class="fact-src">JAMA Pediatrics</div>
+      </div>
+      <div class="fact">
+        <div class="fact-n">$10B</div>
+        <div class="fact-t">estimated economic cost of online harassment annually</div>
+        <div class="fact-src">Economist estimates</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROTECT YOURSELF -->
+<section class="sec dark-bg" id="protect" style="background:var(--navy2)">
+  <div class="sec-inner">
+    <p class="sec-tag">Online Safety Tips</p>
+    <h2>How to protect yourself</h2>
+    <p class="lead">Most doxxing starts with information people share themselves. These habits significantly reduce your exposure.</p>
+    <div class="tip-grid">
+      <div class="tip">
+        <h3>Privacy settings</h3>
+        <ul>
+          <li>Set all social profiles to private</li>
+          <li>Review what old posts reveal</li>
+          <li>Remove location from photos before posting</li>
+          <li>Limit who can find you by email or phone</li>
+          <li>Audit third-party app access regularly</li>
+        </ul>
+      </div>
+      <div class="tip">
+        <h3>Passwords & accounts</h3>
+        <ul>
+          <li>Use a password manager — unique password per site</li>
+          <li>Enable two-factor authentication everywhere</li>
+          <li>Use a separate email for public accounts</li>
+          <li>Never reuse usernames across platforms</li>
+          <li>Check haveibeenpwned.com for breaches</li>
+        </ul>
+      </div>
+      <div class="tip">
+        <h3>What you share</h3>
+        <ul>
+          <li>Don't post your workplace or school publicly</li>
+          <li>Avoid sharing your general neighborhood</li>
+          <li>Be careful with real-time location sharing</li>
+          <li>Think before tagging others in photos</li>
+          <li>Use a P.O. Box for public-facing mail</li>
+        </ul>
+      </div>
+      <div class="tip">
+        <h3>If you're targeted</h3>
+        <ul>
+          <li>Document everything before reporting</li>
+          <li>Don't engage with harassers directly</li>
+          <li>Tell someone you trust immediately</li>
+          <li>Contact the platform's trust & safety team</li>
+          <li>File a police report if threats are made</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO DO IF BULLIED -->
+<section class="sec alt-bg" id="bullied">
+  <div class="sec-inner">
+    <p class="sec-tag">If You're Being Bullied</p>
+    <h2>Concrete steps you can take right now</h2>
+    <p class="lead">Being targeted is disorienting. Here's what to do in order.</p>
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Save the evidence first</h3>
+          <p>Screenshot everything with timestamps visible before you block or report. Platforms often delete flagged content — you need a record if it escalates.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Block the person</h3>
+          <p>Block on every platform, not just the one where the harassment is happening. Don't engage — responses escalate things and give them more content.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Report to the platform</h3>
+          <p>Use every available report mechanism: the post, the account, and any direct messages. Most platforms take doxxing and credible threats seriously.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Tell someone you trust</h3>
+          <p>A parent, friend, teacher, or counselor. Isolation makes it worse. Someone who knows helps you think clearly and can support escalation if needed.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <h3>Escalate to authorities if there are threats</h3>
+          <p>Explicit threats of physical harm warrant a police report. Bring your screenshots. Swatting calls and home address exposure are also police territory.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <h3>Take care of yourself</h3>
+          <p>Being targeted online is traumatic. Take breaks from social media. Talk to someone. The harassment says nothing true about you.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BE PART OF THE SOLUTION -->
+<section class="sec" id="solution">
+  <div class="sec-inner">
+    <p class="sec-tag">Be Part of the Solution</p>
+    <h2>Stand up without escalating</h2>
+    <p class="lead">Intervening in harassment is worth doing. These approaches work without pouring fuel on the fire.</p>
+    <div class="solution-grid">
+      <div class="sol-card">
+        <span class="sol-do">do this</span>
+        <h3>Support the target privately</h3>
+        <p>A direct message saying "I saw what happened, that's not okay, do you need help reporting it" costs you nothing and means more than any public statement.</p>
+      </div>
+      <div class="sol-card">
+        <span class="sol-do">do this</span>
+        <h3>Report without amplifying</h3>
+        <p>Report the content, then stop. Don't screenshot and reshare the attack as "raising awareness" — that extends its reach. Link to the target's response instead, if they made one.</p>
+      </div>
+      <div class="sol-card">
+        <span class="sol-do">do this</span>
+        <h3>Redirect the conversation</h3>
+        <p>In comment sections where a pile-on is forming, a calm statement that changes the subject is often enough to break the momentum. You don't have to argue with anyone.</p>
+      </div>
+      <div class="sol-card">
+        <span class="sol-do">avoid this</span>
+        <h3>Don't counter-harass</h3>
+        <p>Attacking the bully makes you a bully. It also gives them a reason to claim victimhood and recruit more people. Document and report — don't engage.</p>
+      </div>
+      <div class="sol-card">
+        <span class="sol-do">do this</span>
+        <h3>Check in after</h3>
+        <p>The acute phase of a harassment campaign ends, but the target is still dealing with it. Following up a week later matters.</p>
+      </div>
+      <div class="sol-card">
+        <span class="sol-do">do this</span>
+        <h3>Model the behavior you want</h3>
+        <p>How you talk about people online — in public and in private chats — sets norms in your community. Consistency matters more than any single intervention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec alt-bg">
+  <div class="sec-inner">
+    <p class="sec-tag">FAQ</p>
+    <h2>Common questions</h2>
+    <p class="lead">Answers to what people ask most.</p>
+    <div class="faq">
+      <details>
+        <summary>Is doxxing always illegal?</summary>
+        <div class="faq-body">Laws vary by country and state. In many U.S. states, doxxing with intent to harass is explicitly criminalized. Even where it isn't a specific statute, the resulting harassment, stalking, or threats usually are. The legal risk is real and growing as more jurisdictions pass specific legislation.</div>
+      </details>
+      <details>
+        <summary>What if the information was already public?</summary>
+        <div class="faq-body">Aggregating and republishing information — even individually public data — with the intent to facilitate harassment is considered doxxing. Compiling a person's address, employer, relatives, and daily routine from public sources and posting it as a package is a harm regardless of each piece's original availability.</div>
+      </details>
+      <details>
+        <summary>What counts as cyberbullying?</summary>
+        <div class="faq-body">Repeated, targeted harassment that causes distress — whether it's direct messages, public posts, exclusion campaigns, impersonation, or sharing embarrassing content without consent. A single heated argument isn't cyberbullying. A sustained pattern aimed at making someone's online life miserable is.</div>
+      </details>
+      <details>
+        <summary>Can I get information removed if I've been doxxed?</summary>
+        <div class="faq-body">Yes, partially. File a report with each platform hosting the information. Submit removal requests to data broker sites — services like DeleteMe automate this process. Contact Google to request removal from search results. Full removal is very hard; speed matters because the longer it's up, the more it spreads.</div>
+      </details>
+      <details>
+        <summary>What do I do if someone I know is being bullied?</summary>
+        <div class="faq-body">Tell them you've seen it and ask if they want help. Don't share or engage with the harassment content. If they're a minor and there are threats, tell a trusted adult or contact the school. See the <a href="#bullied">What to Do If You're Being Bullied</a> section above for specific steps you can help them take.</div>
+      </details>
+      <details>
+        <summary>What if the platform won't do anything?</summary>
+        <div class="faq-body">Escalate. File a report with your country's cybercrime unit or internet safety agency. In the U.S., the FBI's IC3 (ic3.gov) handles internet crime complaints. Keep documentation of everything including the platform's inaction, as this supports future legal action.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- GET HELP -->
+<section class="sec" id="help">
+  <div class="sec-inner">
+    <p class="sec-tag">Get Help</p>
+    <h2>Trusted resources</h2>
+    <p class="lead">If you or someone you know is experiencing harassment, these organizations can help.</p>
+    <div class="help-grid">
+      <div class="help-card">
+        <h3>Crisis Text Line</h3>
+        <p>Free, 24/7 crisis support via text. Text HOME to 741741 to connect with a trained counselor.</p>
+        <a href="https://www.crisistextline.org" target="_blank" rel="noopener">crisistextline.org</a>
+      </div>
+      <div class="help-card">
+        <h3>Cyber Civil Rights Initiative</h3>
+        <p>Resources and a crisis helpline for victims of non-consensual intimate image sharing and online harassment.</p>
+        <a href="https://cybercivilrights.org" target="_blank" rel="noopener">cybercivilrights.org</a>
+      </div>
+      <div class="help-card">
+        <h3>StopBullying.gov</h3>
+        <p>U.S. government resource with information on federal and state laws, reporting tools, and prevention resources.</p>
+        <a href="https://www.stopbullying.gov" target="_blank" rel="noopener">stopbullying.gov</a>
+      </div>
+      <div class="help-card">
+        <h3>National Suicide Prevention Lifeline</h3>
+        <p>Call or text 988 in the U.S. Available 24/7 for anyone in distress or crisis.</p>
+        <a href="https://988lifeline.org" target="_blank" rel="noopener">988lifeline.org</a>
+      </div>
+      <div class="help-card">
+        <h3>FBI Internet Crime Complaint Center</h3>
+        <p>File a complaint about internet crime including doxxing, swatting, and cyberstalking.</p>
+        <a href="https://www.ic3.gov" target="_blank" rel="noopener">ic3.gov</a>
+      </div>
+      <div class="help-card">
+        <h3>The Cybersmile Foundation</h3>
+        <p>International nonprofit tackling cyberbullying with support services, education, and research.</p>
+        <a href="https://www.cybersmile.org" target="_blank" rel="noopener">cybersmile.org</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLEDGE -->
+<section class="sec dark-bg" id="pledge">
+  <div class="sec-inner">
+    <p class="sec-tag" style="text-align:center">Kindness Pledge</p>
+    <h2 style="text-align:center;max-width:none">Make the commitment</h2>
+    <p class="lead" style="margin:0 auto 2.5rem;text-align:center">The internet is better when people decide to treat each other like people.</p>
+    <div class="pledge-wrap">
+      <div class="pledge-box">
+        "I will not share anyone's private information without their consent. I will not participate in pile-ons or harassment campaigns. When I see someone being targeted, I will offer support — not silence. Behind every screen is a real person, and I will treat them accordingly."
+      </div>
+      <input class="pledge-name" id="pledge-name" type="text" placeholder="Your name or username (optional)" maxlength="60" autocomplete="off">
+      <button id="pledge-btn" onclick="takePledge()">I Commit to This</button>
+      <div id="pledge-confirm">✓ Pledge taken. Thank you.</div>
+      <p class="counter" id="pledge-counter"></p>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<div class="bottom">
+  <h2>Read the full resource guide</h2>
+  <p>More detail, more tools, more links — everything in one document.</p>
+  <a href="https://docs.google.com/document/d/1ZhCNt-jAugHHbkzBVeELMN2MltJJXcBxQzf65qXyq3w/edit?usp=sharing" target="_blank" rel="noopener" class="btn btn-blue">Open the Full Guide</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>SafeScreen — Behind Every Screen Is a Real Person.</p>
+  <a href="https://docs.google.com/document/d/1ZhCNt-jAugHHbkzBVeELMN2MltJJXcBxQzf65qXyq3w/edit?usp=sharing" target="_blank" rel="noopener">Full Resource Guide</a>
+</footer>
+
+<script>
+  // Pledge counter using localStorage
+  function getPledgeCount() {
+    try { return parseInt(localStorage.getItem('pledgeCount') || '0', 10); } catch { return 0; }
+  }
+  function setPledgeCount(n) {
+    try { localStorage.setItem('pledgeCount', String(n)); } catch {}
+  }
+
+  function updateCounter() {
+    const n = getPledgeCount();
+    const el = document.getElementById('pledge-counter');
+    if (el && n > 0) el.textContent = n + ' ' + (n === 1 ? 'person has' : 'people have') + ' taken this pledge.';
+  }
+
+  function takePledge() {
+    const btn = document.getElementById('pledge-btn');
+    const confirm = document.getElementById('pledge-confirm');
+    const taken = (() => { try { return localStorage.getItem('pledgeTaken') === '1'; } catch { return false; } })();
+    if (!taken) {
+      const n = getPledgeCount() + 1;
+      setPledgeCount(n);
+      try { localStorage.setItem('pledgeTaken', '1'); } catch {}
+    }
+    btn.disabled = true;
+    btn.textContent = 'Pledged';
+    btn.style.background = '#15803d';
+    confirm.style.display = 'block';
+    updateCounter();
+  }
+
+  updateCounter();
+  // If already pledged this session, gray the button
+  try {
+    if (localStorage.getItem('pledgeTaken') === '1') {
+      const btn = document.getElementById('pledge-btn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Pledged'; btn.style.background = '#15803d'; }
+    }
+  } catch {}
+</script>
+</body>
+</html>
